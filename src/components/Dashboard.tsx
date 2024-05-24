@@ -48,6 +48,7 @@ export default function Dashboard() {
                 </Center>
             ) : (
                 <Box mx="10px" my="10px">
+                    <Text size="md">My Pokemon</Text>
                     {pokemons.map(pokemon => (
                         <div key={pokemon.id}>
                             <Card shadow="sm" padding="lg" radius="md" withBorder my="10px">
