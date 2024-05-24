@@ -1,4 +1,4 @@
-import { Center, Loader, Image, Card, Text, Badge, Button, Group, Box } from "@mantine/core"
+import { Center, Loader, Image, Card, Text, Badge, Group, Box } from "@mantine/core"
 import axios from "axios"
 import { useEffect, useState } from "react"
 
