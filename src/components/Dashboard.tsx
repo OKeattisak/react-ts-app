@@ -9,6 +9,10 @@ interface Pokemon {
         front_default: string
         front_shiny: string
     }
+    cries: {
+        latest: string
+        legacy: string
+    }
     types: {
         slot: number,
         type: {
@@ -31,6 +35,7 @@ export default function Dashboard() {
             const data = responses.map(response => response.data)
             setPokemons(data)
             setIsLoading(false)
+            console.log(data)
         } catch (error) {
             console.log(error)
         }
@@ -70,8 +75,8 @@ export default function Dashboard() {
                                                     </div>
                                                 ))}
                                             </Group>
-
                                         </Group>
+                                        <audio src={pokemon.cries.latest} controls />
                                     </Card>
                                 </div>
                             </Grid.Col>
