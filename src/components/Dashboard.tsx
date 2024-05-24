@@ -1,4 +1,4 @@
-import { Center, Loader, Image, Card, Text, Badge, Group, Box } from "@mantine/core"
+import { Center, Loader, Image, Card, Text, Badge, Group, Box, Grid, Title } from "@mantine/core"
 import axios from "axios"
 import { useEffect, useState } from "react"
 
@@ -24,7 +24,7 @@ export default function Dashboard() {
     const fetchPokemon = async () => {
         try {
             const promises = []
-            for (let i = 1; i <= 50; i++) {
+            for (let i = 1; i <= 300; i++) {
                 promises.push(axios.get<Pokemon>(`https://pokeapi.co/api/v2/pokemon/${i}/`))
             }
             const responses = await Promise.all(promises)
@@ -48,31 +48,37 @@ export default function Dashboard() {
                 </Center>
             ) : (
                 <Box mx="10px" my="10px">
-                    <Text size="md">My Pokemon</Text>
-                    {pokemons.map(pokemon => (
-                        <div key={pokemon.id}>
-                            <Card shadow="sm" padding="lg" radius="md" withBorder my="10px">
-                                <Card.Section>
-                                    <Image
-                                        src={pokemon.sprites.front_default}
-                                        alt={pokemon.name}
-                                    />
-                                </Card.Section>
+                    <Title order={1}>My Pokemon</Title>
+                    <Grid>
+                        {pokemons.map(pokemon => (
+                            <Grid.Col span={{ base: 12, md: 6, lg: 2 }}>
+                                <div key={pokemon.id}>
+                                    <Card shadow="sm" padding="lg" radius="md" withBorder my="10px">
+                                        <Card.Section>
+                                            <Image
+                                                src={pokemon.sprites.front_default}
+                                                alt={pokemon.name}
+                                            />
+                                        </Card.Section>
 
-                                <Group justify="space-between" mt="md" mb="xs">
-                                    <Text fw={500}>{pokemon.name}</Text>
-                                    <Group>
-                                        {pokemon.types.map(type => (
-                                            <div key={type.slot}>
-                                                <Badge>{type.type.name}</Badge>
-                                            </div>
-                                        ))}
-                                    </Group>
+                                        <Group justify="space-between" mt="md" mb="xs">
+                                            <Text fw={500}>{pokemon.name}</Text>
+                                            <Group>
+                                                {pokemon.types.map(type => (
+                                                    <div key={type.slot}>
+                                                        <Badge>{type.type.name}</Badge>
+                                                    </div>
+                                                ))}
+                                            </Group>
 
-                                </Group>
-                            </Card>
-                        </div>
-                    ))}
+                                        </Group>
+                                    </Card>
+                                </div>
+                            </Grid.Col>
+
+                        ))}
+                    </Grid>
+
                 </Box>
             )}
         </>
